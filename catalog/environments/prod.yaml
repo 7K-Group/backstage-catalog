@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: prod
+  title: Production
+  description: Production environment
+spec:
+  type: environment
+  owner: group:platform
+  system: developer-platform

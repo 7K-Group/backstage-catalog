@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: platform-api
+  title: Platform API
+  description: Public API surface of the developer platform
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:platform
+  system: developer-platform
+  definition: |
+    openapi: 3.0.3
+    info:
+      title: Platform API
+      version: 0.1.0
+    paths:
+      /health:
+        get:
+          responses:
+            '200':
+              description: OK

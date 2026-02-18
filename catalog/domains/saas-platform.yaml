@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: saas-platform
+  title: SaaS Developer Platform
+  description: Domain for the internal SaaS developer platform
+spec:
+  owner: group:platform

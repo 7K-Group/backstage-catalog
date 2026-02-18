@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: platform-api-contract-tests
+  title: Platform API Contract Tests
+  description: Contract test suite for platform-api
+spec:
+  type: test-suite
+  owner: group:platform
+  system: developer-platform
+  dependsOn:
+    - component:platform-api
+    - api:platform-api

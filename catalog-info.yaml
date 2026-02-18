@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: backstage-catalog-root
+  description: Root location for all catalog entities and templates in this repo
+spec:
+  type: file
+  targets:
+    - ./catalog/domains/*.yaml
+    - ./catalog/groups/*.yaml
+    - ./catalog/systems/*.yaml
+    - ./catalog/environments/*.yaml
+    - ./catalog/sourcecode/*.yaml
+    - ./catalog/apis/*.yaml
+    - ./catalog/cicd/*.yaml
+    - ./catalog/tests/*.yaml
+    - ./catalog/monitoring/*.yaml
+    - ./templates/*/template.yaml

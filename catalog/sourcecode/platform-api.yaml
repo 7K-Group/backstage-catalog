@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: platform-api
+  title: Platform API
+  description: Backend API for the developer platform
+  tags:
+    - saas
+    - platform
+spec:
+  type: service
+  lifecycle: production
+  owner: group:platform
+  system: developer-platform
+  providesApis:
+    - platform-api
