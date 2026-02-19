@@ -8,3 +8,13 @@ spec:
   targets:
     - ./catalog/acme-corp.yaml
     - ./catalog/all.yaml
+  rules:
+    - allow:
+        - Location
+        - Group
+        - System
+        - Domain
+        - Component
+        - Resource
+        - API
+
