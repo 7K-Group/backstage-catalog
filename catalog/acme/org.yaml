@@ -9,13 +9,3 @@ spec:
     displayName: 7K Group
   children:
     - platform
----
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: sevenk-groups
-  description: Groups belonging to 7K Group
-spec:
-  type: url
-  targets:
-    - ./platform-group.yaml
