@@ -1,0 +1,102 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: go-microservice
+  title: Go Microservice (Docker + GitHub Actions)
+  description: Scaffold a barebones Go HTTP microservice with a Dockerfile and GitHub Actions CI.
+  tags:
+    - go
+    - microservice
+    - docker
+    - github-actions
+spec:
+  owner: group:default/platform
+  type: service
+
+  parameters:
+    - title: Service details
+      required:
+        - name
+        - owner
+        - system
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Service name (kebab-case), used for the repo and Backstage component.
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        description:
+          title: Description
+          type: string
+          description: Short description of the service.
+        owner:
+          title: Owner
+          type: string
+          description: Owning team/group.
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+        system:
+          title: System
+          type: string
+          description: System this service belongs to.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: System
+
+    - title: Repository
+      required:
+        - repoUrl
+        - moduleName
+      properties:
+        repoUrl:
+          title: Repository location
+          type: string
+          description: GitHub repo to create (e.g. github.com?owner=7KGroup&repo=my-service)
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        moduleName:
+          title: Go module name
+          type: string
+          description: Go module path (e.g. github.com/7KGroup/my-service)
+
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        templateFileExtension: .njk
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          moduleName: ${{ parameters.moduleName }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
