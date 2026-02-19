@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-apis
+  description: Collection of all example APIs
+spec:
+  type: url
+  targets:
+    - ./apis/example-api.yaml

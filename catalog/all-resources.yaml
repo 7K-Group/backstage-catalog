@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-resources
+  description: Collection of all example resources
+spec:
+  type: url
+  targets:
+    - ./resources/example-db.yaml

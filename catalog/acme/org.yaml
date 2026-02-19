@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: sevenk-group
+  description: 7K Group organization
+spec:
+  type: organization
+  profile:
+    displayName: 7K Group
+  children:
+    - platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: sevenk-groups
+  description: Groups belonging to 7K Group
+spec:
+  type: url
+  targets:
+    - ./platform-group.yaml

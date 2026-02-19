@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-systems
+  description: Collection of all example systems
+spec:
+  type: url
+  targets:
+    - ./systems/developer-platform.yaml

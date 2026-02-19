@@ -6,4 +6,6 @@ metadata:
 spec:
   type: url
   targets:
+    - ./catalog/acme-corp.yaml
+    - ./catalog/all.yaml
     - ./templates/catalog-info.yaml

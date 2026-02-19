@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-domains
+  description: Collection of all example domains
+spec:
+  type: url
+  targets:
+    - ./domains/core-platform.yaml

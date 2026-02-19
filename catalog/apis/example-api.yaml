@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: example-api
+  description: Example HTTP API
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:default/platform
+  system: developer-platform
+  definition: |
+    openapi: 3.0.3
+    info:
+      title: Example API
+      version: 1.0.0
+    paths:
+      /healthz:
+        get:
+          responses:
+            '200':
+              description: OK
