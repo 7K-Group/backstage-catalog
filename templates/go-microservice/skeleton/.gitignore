@@ -1,7 +1,0 @@
-/bin/
-/dist/
-*.exe
-*.out
-*.test
-*.log
-.DS_Store

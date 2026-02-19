@@ -1,9 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: '{{ values.name }}'
-  description: 'Catalog location for {{ values.name }}'
-spec:
-  type: file
-  targets:
-    - ./catalog/component.yaml
