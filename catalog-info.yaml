@@ -8,3 +8,4 @@ spec:
   targets:
     - ./catalog/acme-corp.yaml
     - ./catalog/all.yaml
+    - ./templates/all.yaml
