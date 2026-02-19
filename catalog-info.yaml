@@ -6,13 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-    - ./catalog/domains/saas-platform.yaml
-    - ./catalog/groups/platform.yaml
-    - ./catalog/systems/developer-platform.yaml
-    - ./catalog/environments/prod.yaml
-    - ./catalog/sourcecode/platform-api.yaml
-    - ./catalog/apis/platform-api.yaml
-    - ./catalog/cicd/platform-api-github-actions.yaml
-    - ./catalog/tests/platform-api-contract-tests.yaml
-    - ./catalog/monitoring/platform-api-dashboard.yaml
     - ./templates/go-microservice/template.yaml
