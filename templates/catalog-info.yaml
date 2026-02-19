@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: backstage-catalog-templates
+  description: Templates location for this repo
+spec:
+  type: url
+  targets:
+    - ./go-microservice/template.yaml
