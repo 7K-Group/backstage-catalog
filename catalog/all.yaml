@@ -2,12 +2,13 @@ apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
   name: org-all
-  description: Collection of all example entities (excluding groups/templates)
+  description: Collection of all example entities (excluding templates)
 spec:
   type: url
   targets:
     - ./all-apis.yaml
     - ./all-components.yaml
     - ./all-domains.yaml
+    - ./all-identities.yaml
     - ./all-resources.yaml
     - ./all-systems.yaml

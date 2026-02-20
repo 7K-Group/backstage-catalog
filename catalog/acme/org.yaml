@@ -8,4 +8,4 @@ spec:
   profile:
     displayName: 7K Group
   children:
-    - platform
+    - platform-admin

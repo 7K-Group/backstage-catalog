@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: joaodss
+  description: Platform Admin user at 7K Group
+spec:
+  profile:
+    email: joaodss@live.com.pt
+  memberOf:
+    - platform-admin
