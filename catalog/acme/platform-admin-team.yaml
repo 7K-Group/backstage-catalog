@@ -8,5 +8,6 @@ spec:
   profile:
     displayName: Platform Admin Team
   parent: platform
+  children: []
   members:
     - joaodss
