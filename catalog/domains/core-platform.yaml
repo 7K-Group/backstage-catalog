@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: core-platform
-  description: Core platform capabilities
-spec:
-  owner: group:default/platform
-  type: platform

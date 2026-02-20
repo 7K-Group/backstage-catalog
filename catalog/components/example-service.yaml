@@ -6,7 +6,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: group:default/platform
+  owner: group:default/application-team
   system: developer-platform
   providesApis:
     - example-api

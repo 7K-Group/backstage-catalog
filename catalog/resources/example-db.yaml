@@ -5,5 +5,5 @@ metadata:
   description: Example database resource
 spec:
   type: database
-  owner: group:default/platform
+  owner: group:default/cloud-infrastructure-team
   system: developer-platform

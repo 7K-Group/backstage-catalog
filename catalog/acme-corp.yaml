@@ -6,7 +6,7 @@ metadata:
 spec:
   type: url
   targets:
-    - ./acme/org.yaml
-    - ./acme/unit-platform.yaml
-    - ./acme/team-platform-admin.yaml
+    - ./acme/org-platform.yaml
+    - ./acme/platform-branch.yaml
+    - ./acme/heimdall-branch.yaml
     - ./acme/user-joaodss.yaml
