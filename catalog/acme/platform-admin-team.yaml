@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-admin-team
+  description: Platform administrators team at 7K Group
+spec:
+  type: team
+  profile:
+    displayName: Platform Admin Team
+  parent: platform
+  members:
+    - joaodss
