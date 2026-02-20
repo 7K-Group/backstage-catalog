@@ -18,7 +18,10 @@ spec:
         - userName
         - displayName
         - email
-        - memberOf
+        - organization
+        - branch
+        - plane
+        - team
       properties:
         userName:
           title: Username
@@ -34,8 +37,35 @@ spec:
           type: string
           format: email
           description: Corporate email address.
-        memberOf:
-          title: Team
+        organization:
+          title: Organization group
+          type: string
+          description: Top-level organization group.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+              spec.type: organization
+        branch:
+          title: Branch group
+          type: string
+          description: Branch group this user belongs to.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+              spec.type: branch
+        plane:
+          title: Plane group
+          type: string
+          description: Plane group this user belongs to.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+              spec.type: plane
+        team:
+          title: Team group
           type: string
           description: Team this user belongs to.
           ui:field: EntityPicker
@@ -62,7 +92,10 @@ spec:
           userName: ${{ parameters.userName }}
           displayName: ${{ parameters.displayName }}
           email: ${{ parameters.email }}
-          memberOf: ${{ parameters.memberOf }}
+          organization: ${{ parameters.organization }}
+          branch: ${{ parameters.branch }}
+          plane: ${{ parameters.plane }}
+          team: ${{ parameters.team }}
 
     - id: append-location
       name: Append user to identities location

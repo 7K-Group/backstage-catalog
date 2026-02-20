@@ -8,4 +8,7 @@ spec:
     displayName: ${{ values.displayName }}
     email: ${{ values.email }}
   memberOf:
-    - ${{ values.memberOf | replace('group:default/', '') }}
+    - ${{ values.organization | replace('group:default/', '') }}
+    - ${{ values.branch | replace('group:default/', '') }}
+    - ${{ values.plane | replace('group:default/', '') }}
+    - ${{ values.team | replace('group:default/', '') }}

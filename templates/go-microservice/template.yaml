@@ -10,7 +10,7 @@ metadata:
     - docker
     - github-actions
 spec:
-  owner: group:default/platform
+  owner: group:default/core-team
   type: service
 
   parameters:
