@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: ${{ values.userName }}
+  description: User account for ${{ values.displayName }}
+spec:
+  profile:
+    displayName: ${{ values.displayName }}
+    email: ${{ values.email }}
+  memberOf:
+    - ${{ values.memberOf | replace('group:default/', '') }}

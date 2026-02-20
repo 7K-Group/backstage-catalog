@@ -7,3 +7,4 @@ spec:
   type: url
   targets:
     - ./go-microservice/template.yaml
+    - ./user-entity/template.yaml
