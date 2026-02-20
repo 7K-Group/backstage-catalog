@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: sevenk-group
+  description: 7kgroup company organization
+spec:
+  type: organization
+  profile:
+    displayName: 7kgroup
+  children:
+    - platform-branch
+    - heimdall-branch

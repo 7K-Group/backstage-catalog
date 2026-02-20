@@ -1,0 +1,51 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: heimdall-branch
+  description: Heimdall branch of 7kgroup
+spec:
+  type: branch
+  profile:
+    displayName: Heimdall Branch
+  parent: sevenk-group
+  children:
+    - heimdall-application-plane
+    - heimdall-operations-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: heimdall-application-plane
+  description: Application plane for the Heimdall branch
+spec:
+  type: plane
+  profile:
+    displayName: Application Plane
+  parent: heimdall-branch
+  children:
+    - application-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: heimdall-operations-plane
+  description: Operations plane for the Heimdall branch
+spec:
+  type: plane
+  profile:
+    displayName: Operations Plane
+  parent: heimdall-branch
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: application-team
+  description: Team responsible for application lifecycle and feature delivery
+spec:
+  type: team
+  profile:
+    displayName: Application Team
+  parent: heimdall-application-plane

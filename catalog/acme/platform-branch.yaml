@@ -1,0 +1,173 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-branch
+  description: Platform branch of 7kgroup
+spec:
+  type: branch
+  profile:
+    displayName: Platform Branch
+  parent: sevenk-group
+  children:
+    - platform-infrastructure-plane
+    - platform-platform-plane
+    - platform-security-plane
+    - platform-observability-plane
+    - platform-operations-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-infrastructure-plane
+  description: Infrastructure plane for the Platform branch
+spec:
+  type: plane
+  profile:
+    displayName: Infrastructure Plane
+  parent: platform-branch
+  children:
+    - cloud-infrastructure-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-platform-plane
+  description: Platform services plane for the Platform branch
+spec:
+  type: plane
+  profile:
+    displayName: Platform Plane
+  parent: platform-branch
+  children:
+    - cluster-management-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-security-plane
+  description: Security and compliance plane for the Platform branch
+spec:
+  type: plane
+  profile:
+    displayName: Security & Compliance Plane
+  parent: platform-branch
+  children:
+    - cybersecurity-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-observability-plane
+  description: Observability plane for the Platform branch
+spec:
+  type: plane
+  profile:
+    displayName: Observability Plane
+  parent: platform-branch
+  children:
+    - observability-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-operations-plane
+  description: Operations plane for the Platform branch
+spec:
+  type: plane
+  profile:
+    displayName: Operations Plane
+  parent: platform-branch
+  children:
+    - operations-team
+    - core-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: core-team
+  description: Cross-functional core team for release, quality, and client engagement
+spec:
+  type: team
+  profile:
+    displayName: Core Team
+  parent: platform-operations-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: cloud-infrastructure-team
+  description: Infrastructure team for cloud automation and IaC
+spec:
+  type: team
+  profile:
+    displayName: Cloud Infrastructure Team
+  parent: platform-infrastructure-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: cluster-management-team
+  description: Team for Kubernetes cluster provisioning, scaling, and upgrades
+spec:
+  type: team
+  profile:
+    displayName: Cluster Management Team
+  parent: platform-platform-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: operations-team
+  description: Team for reliability, incident handling, and runtime operations
+spec:
+  type: team
+  profile:
+    displayName: Operations Team
+  parent: platform-operations-plane
+  children:
+    - platform-admin-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: cybersecurity-team
+  description: Team for IAM, authentication, authorization, and compliance governance
+spec:
+  type: team
+  profile:
+    displayName: Cybersecurity Team
+  parent: platform-security-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: observability-team
+  description: Team for monitoring, logging, dashboards, and alerting
+spec:
+  type: team
+  profile:
+    displayName: Observability Team
+  parent: platform-observability-plane
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-admin-team
+  description: Administrative team for platform operations and access management
+spec:
+  type: team
+  profile:
+    displayName: Platform Admin Team
+  parent: operations-team
