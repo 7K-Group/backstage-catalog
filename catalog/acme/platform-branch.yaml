@@ -97,6 +97,7 @@ spec:
   profile:
     displayName: Core Team
   parent: platform-operations-plane
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -109,6 +110,7 @@ spec:
   profile:
     displayName: Cloud Infrastructure Team
   parent: platform-infrastructure-plane
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -121,6 +123,7 @@ spec:
   profile:
     displayName: Cluster Management Team
   parent: platform-platform-plane
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -147,6 +150,7 @@ spec:
   profile:
     displayName: Cybersecurity Team
   parent: platform-security-plane
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -159,6 +163,7 @@ spec:
   profile:
     displayName: Observability Team
   parent: platform-observability-plane
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -171,3 +176,4 @@ spec:
   profile:
     displayName: Platform Admin Team
   parent: operations-team
+  children: []

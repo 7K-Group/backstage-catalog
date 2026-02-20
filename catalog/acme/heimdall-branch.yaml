@@ -37,6 +37,7 @@ spec:
   profile:
     displayName: Operations Plane
   parent: heimdall-branch
+  children: []
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -49,3 +50,4 @@ spec:
   profile:
     displayName: Application Team
   parent: heimdall-application-plane
+  children: []
