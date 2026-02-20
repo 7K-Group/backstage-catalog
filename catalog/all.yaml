@@ -9,4 +9,4 @@ spec:
     - ./all-apis.yaml
     - ./all-components.yaml
     - ./all-resources.yaml
-    - ./all-systems.yaml
+
