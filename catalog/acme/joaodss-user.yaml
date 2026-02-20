@@ -7,3 +7,5 @@ spec:
   profile:
     displayName: Joao Santos
     email: joaodss@live.com.pt
+  memberOf:
+    - platform-admin-team

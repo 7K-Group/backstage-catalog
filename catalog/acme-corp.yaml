@@ -7,5 +7,6 @@ spec:
   type: url
   targets:
     - ./acme/org.yaml
+    - ./acme/platform.yaml
     - ./acme/platform-admin-team.yaml
     - ./acme/joaodss-user.yaml
