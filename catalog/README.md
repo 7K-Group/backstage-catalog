@@ -18,3 +18,21 @@ Conventions:
 - `metadata.name`: kebab-case, globally unique within its kind
 - `spec.owner`: `group:platform` (or another group defined in `catalog/groups/`)
 - Components should reference their system via `spec.system`.
+
+## Organization inheritance graph
+
+```mermaid
+graph TD
+	A[Group: sevenk-group<br/>type: organization] --> B[Group: platform-branch<br/>type: branch]
+	B --> C[Group: platform-operations-plane<br/>type: plane]
+	C --> D[Group: operations-team<br/>type: team]
+	D --> E[Group: platform-admin-team<br/>type: team]
+	U[User: joaodss] -->|memberOf| E
+	U -->|memberOf| D
+	U -->|memberOf| C
+	U -->|memberOf| B
+	U -->|memberOf| A
+```
+
+Backstage relations are direct; user membership is not automatically inferred from child teams to parent groups.
+To show a user on team, plane, branch, and organization levels, include each ancestor in `User.spec.memberOf` (or define equivalent direct `Group.spec.members` entries).
