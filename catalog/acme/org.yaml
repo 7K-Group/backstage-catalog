@@ -7,5 +7,3 @@ spec:
   type: organization
   profile:
     displayName: 7K Group
-  children:
-    - platform-admin
