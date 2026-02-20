@@ -4,7 +4,7 @@ metadata:
   name: platform
   description: Platform Engineering team at 7K Group
 spec:
-  type: team
+  type: Unit
   profile:
     displayName: Platform
   parent: sevenk-group
