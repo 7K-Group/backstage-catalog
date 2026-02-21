@@ -146,16 +146,3 @@ spec:
     displayName: Observability Team
   parent: platform-observability-plane
   children: []
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: platform-admin-team
-  description: Administrative team for platform operations and access management
-spec:
-  type: team
-  profile:
-    displayName: Platform Admin Team
-  parent: operations-team
-  children: []
