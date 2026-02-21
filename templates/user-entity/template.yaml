@@ -44,20 +44,7 @@ spec:
               kind: Group
               spec.type: team
 
-    - title: Catalog repository (advanced)12
-2026-02-21T15:48:13.247Z NotFoundError: Template action with ID 'roadiehq:utils:fs:append' is not registered. See https://backstage.io/docs/features/software-templates/builtin-actions/ on how to add a new action module.
-13
-    at DefaultTemplateActionRegistry.get (/app/node_modules/@backstage/plugin-scaffolder-backend/dist/scaffolder/actions/TemplateActionRegistry.cjs.js:23:13)
-14
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-15
-    at async NunjucksWorkflowRunner.executeStep (/app/node_modules/@backstage/plugin-scaffolder-backend/dist/scaffolder/tasks/NunjucksWorkflowRunner.cjs.js:156:22)
-16
-    at async NunjucksWorkflowRunner.execute (/app/node_modules/@backstage/plugin-scaffolder-backend/dist/scaffolder/tasks/NunjucksWorkflowRunner.cjs.js:412:9)
-17
-    at async TaskWorker.runOneTask (/app/node_modules/@backstage/plugin-scaffolder-backend/dist/scaffolder/tasks/TaskWorker.cjs.js:128:26)
-18
-    at async run (/app/node_modules/p-queue/dist/index.js:163:29)
+    - title: Catalog repository (advanced)
       required:
         - catalogOwner
       properties:
