@@ -44,12 +44,22 @@ spec:
               kind: Group
               spec.type: team
 
+    - title: Catalog repository (advanced)
+      required:
+        - catalogOwner
+      properties:
+        catalogOwner:
+          title: Catalog repo owner
+          type: string
+          description: GitHub org/user that owns the backstage-catalog repository.
+          default: 7KGroup
+
   steps:
     - id: fetch-base
       name: Fetch catalog repository
       action: fetch:plain
       input:
-        url: https://github.com/7KGroup/backstage-catalog/tree/main
+        url: https://github.com/${{ parameters.catalogOwner }}/backstage-catalog
 
     - id: fetch
       name: Fetch skeleton
@@ -75,7 +85,7 @@ spec:
       name: Create pull request
       action: publish:github:pull-request
       input:
-        repoUrl: github.com?owner=7KGroup&repo=backstage-catalog
+        repoUrl: github.com?owner=${{ parameters.catalogOwner }}&repo=backstage-catalog
         targetBranchName: main
         branchName: chore/add-user-${{ parameters.userName }}
         title: Add catalog user ${{ parameters.userName }}
