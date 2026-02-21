@@ -26,4 +26,16 @@ spec:
   children:
     - application-team
 
+
 ---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: application-team
+  description: Team responsible for application lifecycle and feature delivery
+spec:
+  type: team
+  profile:
+    displayName: Application Team
+  parent: heimdall-application-plane
+  children: []
