@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-identities
+  description: Collection of all identity entities (groups/users)
+spec:
+  type: url
+  targets:
+{% for f in values.acmeFiles %}
+  {% if f.type == 'file' %}
+    - ./acme/${{ f.path | replace('catalog/acme/', '') | replace('acme/', '') }}
+  {% endif %}
+{% endfor %}
