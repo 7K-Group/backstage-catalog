@@ -1,31 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: platform-branch
-  description: Platform branch of 7kgroup
-spec:
-  type: branch
-  profile:
-    displayName: Platform Branch
-  parent: sevenk-group
-  children:
-    - platform-infrastructure-plane
-    - platform-platform-plane
-    - platform-security-plane
-    - platform-observability-plane
-    - platform-operations-plane
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
   name: platform-infrastructure-plane
-  description: Infrastructure plane for the Platform branch
+  description: Infrastructure plane for 7kgroup
 spec:
   type: plane
   profile:
     displayName: Infrastructure Plane
-  parent: platform-branch
+  parent: sevenk-group
   children:
     - cloud-infrastructure-team
 
@@ -34,12 +16,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: platform-platform-plane
-  description: Platform services plane for the Platform branch
+  description: Platform services plane for 7kgroup
 spec:
   type: plane
   profile:
     displayName: Platform Plane
-  parent: platform-branch
+  parent: sevenk-group
   children:
     - cluster-management-team
 
@@ -48,12 +30,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: platform-security-plane
-  description: Security and compliance plane for the Platform branch
+  description: Security and compliance plane for 7kgroup
 spec:
   type: plane
   profile:
     displayName: Security & Compliance Plane
-  parent: platform-branch
+  parent: sevenk-group
   children:
     - cybersecurity-team
 
@@ -62,12 +44,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: platform-observability-plane
-  description: Observability plane for the Platform branch
+  description: Observability plane for 7kgroup
 spec:
   type: plane
   profile:
     displayName: Observability Plane
-  parent: platform-branch
+  parent: sevenk-group
   children:
     - observability-team
 
@@ -76,12 +58,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: platform-operations-plane
-  description: Operations plane for the Platform branch
+  description: Operations plane for 7kgroup
 spec:
   type: plane
   profile:
     displayName: Operations Plane
-  parent: platform-branch
+  parent: sevenk-group
   children:
     - operations-team
     - core-team

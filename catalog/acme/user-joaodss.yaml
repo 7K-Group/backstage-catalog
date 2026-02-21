@@ -9,7 +9,6 @@ spec:
     email: joaodss@live.com.pt
   memberOf:
     - sevenk-group
-    - platform-branch
     - platform-operations-plane
     - operations-team
     - platform-admin-team

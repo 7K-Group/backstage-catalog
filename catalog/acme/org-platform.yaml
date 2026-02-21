@@ -8,5 +8,9 @@ spec:
   profile:
     displayName: 7kgroup
   children:
-    - platform-branch
-    - heimdall-branch
+    - platform-infrastructure-plane
+    - platform-platform-plane
+    - platform-security-plane
+    - platform-observability-plane
+    - platform-operations-plane
+    - heimdall-application-plane
