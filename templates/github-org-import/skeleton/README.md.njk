@@ -19,3 +19,7 @@ If you used the **pull request into an existing repo** option, make sure the gen
 - Backstage has GitHub credentials configured (token or GitHub App) that can read the target repositories (especially for private repos).
 
 If you used this template to **create a repo** or **open a PR**, the configured credentials must also have permissions to write to the destination repository/organization (e.g. GitHub App permissions such as `Contents: Read & write` and `Pull requests: Read & write`, and installation access to the org/repo).
+
+Troubleshooting:
+
+- If you see `Resource not accessible by integration`, the GitHub App is authenticated but does not have access to the repo (not installed on that repo/org, or missing required write permissions).
