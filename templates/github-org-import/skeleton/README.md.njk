@@ -11,6 +11,8 @@ When this repo is registered in Backstage, the GitHub discovery processor will s
 
 and import the catalog descriptor from each matching repository.
 
+If you used the **pull request into an existing repo** option, make sure the generated `catalog-info.yaml` (in the target folder) is referenced by an already-ingested Backstage `Location` (for example by adding it to an index `Location` file in your catalog repo).
+
 ## Prerequisites in your Backstage instance
 
 - Catalog backend has the GitHub discovery processor enabled (from `@backstage/plugin-catalog-backend-module-github`).
