@@ -59,8 +59,6 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-            requestUserCredentials:
-              secretsKey: USER_OAUTH_TOKEN
 
         existingRepoUrl:
           title: Existing repository location
@@ -70,8 +68,6 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
-            requestUserCredentials:
-              secretsKey: USER_OAUTH_TOKEN
         existingTargetPath:
           title: Target folder in existing repo
           type: string
@@ -130,7 +126,6 @@ spec:
         repoUrl: ${{ parameters.createRepoUrl }}
         description: ${{ parameters.description }}
         defaultBranch: main
-        token: ${{ secrets.USER_OAUTH_TOKEN }}
 
     - id: publishPr
       name: Publish to GitHub (pull request)
@@ -144,7 +139,6 @@ spec:
         description: ${{ parameters.description }}
         sourcePath: .
         targetPath: ${{ parameters.existingTargetPath }}
-        token: ${{ secrets.USER_OAUTH_TOKEN }}
 
     - id: register
       name: Register in catalog

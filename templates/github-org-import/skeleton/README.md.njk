@@ -16,4 +16,6 @@ If you used the **pull request into an existing repo** option, make sure the gen
 ## Prerequisites in your Backstage instance
 
 - Catalog backend has the GitHub discovery processor enabled (from `@backstage/plugin-catalog-backend-module-github`).
-- Backstage has GitHub credentials configured that can read the target repositories (especially for private repos).
+- Backstage has GitHub credentials configured (token or GitHub App) that can read the target repositories (especially for private repos).
+
+If you used this template to **create a repo** or **open a PR**, the configured credentials must also have permissions to write to the destination repository/organization (e.g. GitHub App permissions such as `Contents: Read & write` and `Pull requests: Read & write`, and installation access to the org/repo).
