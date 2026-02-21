@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: github-org-{{ values.githubOrg | lower }}
-  description: GitHub org discovery for {{ values.githubOrg }}
-spec:
-  type: github-discovery
-  target: https://{{ values.githubHost }}/{{ values.githubOrg }}/*/blob/{{ values.defaultBranch }}/{{ values.catalogInfoPath }}
