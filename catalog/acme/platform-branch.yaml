@@ -118,9 +118,7 @@ spec:
   profile:
     displayName: Operations Team
   parent: platform-operations-plane
-  children:
-    - platform-admin-team
-
+  children: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Group
