@@ -1,0 +1,93 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: github-org-import
+  title: Import GitHub Organization Repos
+  description: Creates a Location using github-discovery to ingest catalog-info.yaml from every repo in a GitHub org.
+  tags:
+    - catalog
+    - github
+    - discovery
+spec:
+  owner: group:default/core-team
+  type: catalog
+
+  parameters:
+    - title: GitHub source
+      required:
+        - githubOrg
+      properties:
+        githubOrg:
+          title: Organization
+          type: string
+          description: GitHub organization to discover repositories from.
+          pattern: '^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38}[A-Za-z0-9])?$'
+        githubHost:
+          title: GitHub host
+          type: string
+          description: GitHub host for discovery (use github.com or your GHE host).
+          default: github.com
+        defaultBranch:
+          title: Default branch
+          type: string
+          description: Branch to look for catalog-info.yaml in each repo.
+          default: main
+        catalogInfoPath:
+          title: Catalog file path
+          type: string
+          description: Path to the catalog descriptor in each repo.
+          default: catalog-info.yaml
+
+    - title: Destination repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository location
+          type: string
+          description: GitHub repo to create that will contain the discovery Location (e.g. github.com?owner=7KGroup&repo=org-catalog-discovery)
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        description:
+          title: Repository description
+          type: string
+          default: Backstage catalog discovery location for importing all repos from a GitHub organization.
+
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        templateFileExtension: .njk
+        values:
+          githubOrg: ${{ parameters.githubOrg }}
+          githubHost: ${{ parameters.githubHost }}
+          defaultBranch: ${{ parameters.defaultBranch }}
+          catalogInfoPath: ${{ parameters.catalogInfoPath }}
+          description: ${{ parameters.description }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}

@@ -1,0 +1,17 @@
+# Backstage GitHub org import
+
+{{ values.description }}
+
+## What this does
+
+This repository contains a single Backstage `Location` entity of type `github-discovery`.
+When this repo is registered in Backstage, the GitHub discovery processor will scan:
+
+- `https://{{ values.githubHost }}/{{ values.githubOrg }}/*/blob/{{ values.defaultBranch }}/{{ values.catalogInfoPath }}`
+
+and import the catalog descriptor from each matching repository.
+
+## Prerequisites in your Backstage instance
+
+- Catalog backend has the GitHub discovery processor enabled (from `@backstage/plugin-catalog-backend-module-github`).
+- Backstage has GitHub credentials configured that can read the target repositories (especially for private repos).
