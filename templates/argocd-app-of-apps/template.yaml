@@ -48,13 +48,14 @@ spec:
             catalogFilter:
               kind: System
         serviceEntityRef:
-          title: Kubernetes service (Backstage Component)
+          title: Kubernetes cluster (Backstage Resource)
           type: string
-          description: Backstage entity ref of the Kubernetes-backed service this GitOps repo manages (e.g. component:default/my-service).
+          description: Backstage entity ref of the Kubernetes cluster resource this GitOps repo targets (e.g. resource:default/local-cluster).
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
-              kind: Component
+              kind: Resource
+              'spec.type': kubernetes-cluster
 
         appsSubfolder:
           title: Apps subfolder (domain/project)
