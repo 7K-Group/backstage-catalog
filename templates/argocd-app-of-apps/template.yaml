@@ -79,7 +79,6 @@ spec:
     - title: Repository
       required:
         - orgEntityRef
-        - repoName
       properties:
         orgEntityRef:
           title: Organization
@@ -90,12 +89,6 @@ spec:
             catalogFilter:
               kind: Group
               'spec.type': organization
-
-        repoName:
-          title: Repository name
-          type: string
-          description: Repository name to create (kebab-case).
-          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
 
   steps:
     - id: fetchOrg
@@ -119,13 +112,13 @@ spec:
           argocdNamespace: ${{ parameters.argocdNamespace }}
           project: ${{ parameters.project }}
           destinationServer: ${{ parameters.destinationServer }}
-          argoRepoUrl: https://github.com/${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}/${{ parameters.repoName }}.git
+          argoRepoUrl: https://github.com/${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}/${{ parameters.name }}.git
 
     - id: publish
       name: Publish to GitHub
       action: publish:github
       input:
-        repoUrl: github.com?owner=${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}&repo=${{ parameters.repoName }}
+        repoUrl: github.com?owner=${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}&repo=${{ parameters.name }}
         description: ${{ parameters.description }}
         defaultBranch: main
 
