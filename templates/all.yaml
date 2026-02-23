@@ -7,4 +7,5 @@ spec:
   type: url
   targets:
     - ./go-microservice/template.yaml
-    - ./github-org-import/template.yaml
+    - ./keycloak-instance/template.yaml
+    - ./argocd-app-of-apps/template.yaml

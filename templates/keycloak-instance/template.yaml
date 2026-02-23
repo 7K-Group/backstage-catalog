@@ -1,0 +1,183 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: keycloak-instance
+  title: Keycloak Instance (Argo CD App-of-Apps)
+  description: Creates an app-of-apps style Argo CD repository for a Keycloak instance (bootstrap + apps) and registers it as a Backstage Resource.
+  tags:
+    - keycloak
+    - argocd
+    - gitops
+spec:
+  owner: group:default/core-team
+  type: resource
+
+  parameters:
+    - title: Instance details
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Instance name
+          type: string
+          description: Instance name (kebab-case). Used for the Backstage Resource and Argo CD Application.
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        description:
+          title: Description
+          type: string
+          description: Short description of this Keycloak instance.
+        owner:
+          title: Owner
+          type: string
+          description: Owning team/group.
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+        system:
+          title: System
+          type: string
+          description: System this resource belongs to.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: System
+
+    - title: Argo CD
+      required:
+        - destinationServer
+        - destinationNamespace
+        - chartRepoUrl
+        - chartName
+        - chartVersion
+        - appsSubfolder
+        - argoRepoUrl
+        - extrasRepoUrl
+        - extrasPath
+      properties:
+        argocdNamespace:
+          title: Argo CD namespace
+          type: string
+          description: Namespace where Argo CD runs (used by the Backstage Argo CD plugin annotation).
+          default: argocd
+        appsSubfolder:
+          title: Apps subfolder (domain/project)
+          type: string
+          description: Subfolder under `apps/` to group child Applications (e.g. platform, identity).
+          default: identity
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        argoRepoUrl:
+          title: Argo CD repoURL (this repo)
+          type: string
+          description: Full git URL Argo CD should use for the newly created repo (e.g. https://github.com/7KGroup/keycloak-myteam-dev.git)
+        destinationServer:
+          title: Destination cluster API server
+          type: string
+          description: Kubernetes API server URL for Argo CD destination (e.g. https://kubernetes.default.svc)
+          default: https://kubernetes.default.svc
+        destinationNamespace:
+          title: Destination namespace
+          type: string
+          description: Namespace where Keycloak will be installed.
+          default: keycloak
+        project:
+          title: Argo CD Project
+          type: string
+          description: Argo CD project name.
+          default: default
+        chartRepoUrl:
+          title: Helm chart repo URL
+          type: string
+          description: Helm repository URL that contains the Keycloak chart.
+        chartName:
+          title: Helm chart name
+          type: string
+          description: Helm chart name (e.g. keycloak).
+        chartVersion:
+          title: Helm chart version
+          type: string
+          description: Helm chart version or semver range.
+        helmValues:
+          title: Helm values
+          type: string
+          description: Optional Helm values YAML to pass to Argo CD.
+          ui:widget: textarea
+
+        extrasRepoUrl:
+          title: Extras repoURL
+          type: string
+          description: Git repo URL containing extra manifests to deploy (e.g. https://github.com/Noone-Home/app-of-apps.git)
+          default: https://github.com/Noone-Home/app-of-apps.git
+        extrasRevision:
+          title: Extras targetRevision
+          type: string
+          description: Git revision/branch/tag for extras.
+          default: main
+        extrasPath:
+          title: Extras path
+          type: string
+          description: Path in the extras repo to sync (e.g. extras/backstage-extras)
+          default: extras/backstage-extras
+
+    - title: Repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository location
+          type: string
+          description: GitHub repo to create for this instance (e.g. github.com?owner=7KGroup&repo=keycloak-myteam-dev)
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        templateFileExtension: .njk
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          argocdNamespace: ${{ parameters.argocdNamespace }}
+          appsSubfolder: ${{ parameters.appsSubfolder }}
+          argoRepoUrl: ${{ parameters.argoRepoUrl }}
+          destinationServer: ${{ parameters.destinationServer }}
+          destinationNamespace: ${{ parameters.destinationNamespace }}
+          project: ${{ parameters.project }}
+          chartRepoUrl: ${{ parameters.chartRepoUrl }}
+          chartName: ${{ parameters.chartName }}
+          chartVersion: ${{ parameters.chartVersion }}
+          helmValues: ${{ parameters.helmValues }}
+          extrasRepoUrl: ${{ parameters.extrasRepoUrl }}
+          extrasRevision: ${{ parameters.extrasRevision }}
+          extrasPath: ${{ parameters.extrasPath }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}

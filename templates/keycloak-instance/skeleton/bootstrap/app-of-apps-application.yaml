@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{ values.name }}
+  namespace: ${{ values.argocdNamespace }}
+spec:
+  project: ${{ values.project }}
+  source:
+    repoURL: ${{ values.argoRepoUrl }}
+    targetRevision: HEAD
+    path: apps
+    directory:
+      recurse: true
+  destination:
+    server: ${{ values.destinationServer }}
+    namespace: ${{ values.destinationNamespace }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

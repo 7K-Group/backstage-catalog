@@ -1,0 +1,141 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: argocd-app-of-apps
+  title: Argo CD App-of-Apps Repository
+  description: Creates a Git repository containing an Argo CD app-of-apps root Application and registers it as a Backstage Resource linked to a Kubernetes service.
+  tags:
+    - argocd
+    - gitops
+    - kubernetes
+spec:
+  owner: group:default/core-team
+  type: resource
+
+  parameters:
+    - title: App-of-apps details
+      required:
+        - name
+        - owner
+        - serviceEntityRef
+
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Name (kebab-case). Used for the repository, Backstage Resource, and Argo CD root Application name.
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        description:
+          title: Description
+          type: string
+          description: Short description of this app-of-apps repository.
+        owner:
+          title: Owner
+          type: string
+          description: Owning team/group.
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+        system:
+          title: System
+          type: string
+          description: System this resource belongs to.
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: System
+        serviceEntityRef:
+          title: Kubernetes service (Backstage Component)
+          type: string
+          description: Backstage entity ref of the Kubernetes-backed service this GitOps repo manages (e.g. component:default/my-service).
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Component
+
+    - title: Argo CD settings
+      required:
+        - destinationServer
+        - destinationNamespace
+      properties:
+        argocdNamespace:
+          title: Argo CD namespace
+          type: string
+          description: Namespace where Argo CD runs (used by the Backstage Argo CD plugin annotation and root Application namespace).
+          default: argocd
+        project:
+          title: Argo CD Project
+          type: string
+          description: Argo CD project name.
+          default: default
+        destinationServer:
+          title: Destination cluster API server
+          type: string
+          description: Kubernetes API server URL for Argo CD destination (e.g. https://kubernetes.default.svc)
+          default: https://kubernetes.default.svc
+        destinationNamespace:
+          title: Destination namespace
+          type: string
+          description: Namespace where the child apps will deploy by default.
+          default: default
+
+    - title: Repository
+      required:
+        - repoUrl
+        - argoRepoUrl
+      properties:
+        repoUrl:
+          title: Repository location
+          type: string
+          description: GitHub repo to create (e.g. github.com?owner=7KGroup&repo=gitops-my-service)
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        argoRepoUrl:
+          title: Argo CD repoURL
+          type: string
+          description: Full git URL Argo CD should use for this repo (e.g. https://github.com/7KGroup/gitops-my-service.git)
+
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        templateFileExtension: .njk
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          serviceEntityRef: ${{ parameters.serviceEntityRef }}
+          argocdNamespace: ${{ parameters.argocdNamespace }}
+          project: ${{ parameters.project }}
+          destinationServer: ${{ parameters.destinationServer }}
+          destinationNamespace: ${{ parameters.destinationNamespace }}
+          argoRepoUrl: ${{ parameters.argoRepoUrl }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
