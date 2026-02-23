@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: local-cluster
+  description: Local Kubernetes cluster resource
+spec:
+  type: kubernetes-cluster
+  owner: group:default/core-team
+  system: developer-platform
