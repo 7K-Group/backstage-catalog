@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: developer-platform
+  description: Platform capabilities and shared services for building and operating software.
+spec:
+  owner: group:default/core-team
+  domain: developer-platform
