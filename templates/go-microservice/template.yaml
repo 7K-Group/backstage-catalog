@@ -49,23 +49,30 @@ spec:
 
     - title: Repository
       required:
-        - repoUrl
+        - orgEntityRef
         - moduleName
       properties:
-        repoUrl:
-          title: Repository location
+        orgEntityRef:
+          title: Organization
           type: string
-          description: GitHub repo to create (e.g. github.com?owner=7KGroup&repo=my-service)
-          ui:field: RepoUrlPicker
+          description: Destination organization from the Backstage catalog.
+          ui:field: EntityPicker
           ui:options:
-            allowedHosts:
-              - github.com
+            catalogFilter:
+              kind: Group
+              'spec.type': organization
         moduleName:
           title: Go module name
           type: string
           description: Go module path (e.g. github.com/7KGroup/my-service)
 
   steps:
+    - id: fetchOrg
+      name: Fetch organization
+      action: catalog:fetch
+      input:
+        entityRef: ${{ parameters.orgEntityRef }}
+
     - id: fetch
       name: Fetch skeleton
       action: fetch:template
@@ -83,7 +90,7 @@ spec:
       name: Publish to GitHub
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: github.com?owner=${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}&repo=${{ parameters.name }}
         description: ${{ parameters.description }}
         defaultBranch: main
 

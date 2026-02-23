@@ -3,6 +3,8 @@ kind: Group
 metadata:
   name: sevenk-group
   description: 7kgroup company organization
+  annotations:
+    github.com/org: 7k-group
 spec:
   type: organization
   profile:

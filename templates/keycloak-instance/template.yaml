@@ -53,7 +53,6 @@ spec:
         - chartName
         - chartVersion
         - appsSubfolder
-        - argoRepoUrl
         - extrasRepoUrl
         - extrasPath
       properties:
@@ -68,10 +67,6 @@ spec:
           description: Subfolder under `apps/` to group child Applications (e.g. platform, identity).
           default: identity
           pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-        argoRepoUrl:
-          title: Argo CD repoURL (this repo)
-          type: string
-          description: Full git URL Argo CD should use for the newly created repo (e.g. https://github.com/7KGroup/keycloak-myteam-dev.git)
         destinationServer:
           title: Destination cluster API server
           type: string
@@ -123,18 +118,32 @@ spec:
 
     - title: Repository
       required:
-        - repoUrl
+        - orgEntityRef
+        - repoName
       properties:
-        repoUrl:
-          title: Repository location
+        orgEntityRef:
+          title: Organization
           type: string
-          description: GitHub repo to create for this instance (e.g. github.com?owner=7KGroup&repo=keycloak-myteam-dev)
-          ui:field: RepoUrlPicker
+          description: Destination organization from the Backstage catalog.
+          ui:field: EntityPicker
           ui:options:
-            allowedHosts:
-              - github.com
+            catalogFilter:
+              kind: Group
+              'spec.type': organization
+
+        repoName:
+          title: Repository name
+          type: string
+          description: Repository name to create (kebab-case).
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
 
   steps:
+    - id: fetchOrg
+      name: Fetch organization
+      action: catalog:fetch
+      input:
+        entityRef: ${{ parameters.orgEntityRef }}
+
     - id: fetch
       name: Fetch skeleton
       action: fetch:template
@@ -148,7 +157,7 @@ spec:
           system: ${{ parameters.system }}
           argocdNamespace: ${{ parameters.argocdNamespace }}
           appsSubfolder: ${{ parameters.appsSubfolder }}
-          argoRepoUrl: ${{ parameters.argoRepoUrl }}
+          argoRepoUrl: https://github.com/${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}/${{ parameters.repoName }}.git
           destinationServer: ${{ parameters.destinationServer }}
           destinationNamespace: ${{ parameters.destinationNamespace }}
           project: ${{ parameters.project }}
@@ -164,7 +173,7 @@ spec:
       name: Publish to GitHub
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: github.com?owner=${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}&repo=${{ parameters.repoName }}
         description: ${{ parameters.description }}
         defaultBranch: main
 

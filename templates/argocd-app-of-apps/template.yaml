@@ -18,6 +18,7 @@ spec:
         - name
         - owner
         - serviceEntityRef
+        - appsSubfolder
 
       properties:
         name:
@@ -55,6 +56,13 @@ spec:
             catalogFilter:
               kind: Component
 
+        appsSubfolder:
+          title: Apps subfolder (domain/project)
+          type: string
+          description: Subfolder under `apps/` to group child Applications (e.g. platform, payments, identity).
+          default: platform
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+
     - title: Argo CD settings
       required:
         - destinationServer
@@ -83,23 +91,32 @@ spec:
 
     - title: Repository
       required:
-        - repoUrl
-        - argoRepoUrl
+        - orgEntityRef
+        - repoName
       properties:
-        repoUrl:
-          title: Repository location
+        orgEntityRef:
+          title: Organization
           type: string
-          description: GitHub repo to create (e.g. github.com?owner=7KGroup&repo=gitops-my-service)
-          ui:field: RepoUrlPicker
+          description: Destination organization from the Backstage catalog.
+          ui:field: EntityPicker
           ui:options:
-            allowedHosts:
-              - github.com
-        argoRepoUrl:
-          title: Argo CD repoURL
+            catalogFilter:
+              kind: Group
+              'spec.type': organization
+
+        repoName:
+          title: Repository name
           type: string
-          description: Full git URL Argo CD should use for this repo (e.g. https://github.com/7KGroup/gitops-my-service.git)
+          description: Repository name to create (kebab-case).
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
 
   steps:
+    - id: fetchOrg
+      name: Fetch organization
+      action: catalog:fetch
+      input:
+        entityRef: ${{ parameters.orgEntityRef }}
+
     - id: fetch
       name: Fetch skeleton
       action: fetch:template
@@ -112,17 +129,18 @@ spec:
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           serviceEntityRef: ${{ parameters.serviceEntityRef }}
+          appsSubfolder: ${{ parameters.appsSubfolder }}
           argocdNamespace: ${{ parameters.argocdNamespace }}
           project: ${{ parameters.project }}
           destinationServer: ${{ parameters.destinationServer }}
           destinationNamespace: ${{ parameters.destinationNamespace }}
-          argoRepoUrl: ${{ parameters.argoRepoUrl }}
+          argoRepoUrl: https://github.com/${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}/${{ parameters.repoName }}.git
 
     - id: publish
       name: Publish to GitHub
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: github.com?owner=${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}&repo=${{ parameters.repoName }}
         description: ${{ parameters.description }}
         defaultBranch: main
 
