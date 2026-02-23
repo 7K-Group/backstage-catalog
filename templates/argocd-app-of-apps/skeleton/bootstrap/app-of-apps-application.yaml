@@ -1,4 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: common
+  namespace: ${{ values.argocdNamespace }}
+spec:
+  description: Core shared infrastructure components (storage, certs, ingress controllers, monitoring)
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: ${{ values.argocdNamespace }}
+      server: ${{ values.destinationServer }}
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  orphanedResources:
+    warn: true
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ${{ values.name }}

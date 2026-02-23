@@ -69,7 +69,7 @@ spec:
           title: Argo CD Project
           type: string
           description: Argo CD project name.
-          default: default
+          default: common
         destinationServer:
           title: Destination cluster API server
           type: string
