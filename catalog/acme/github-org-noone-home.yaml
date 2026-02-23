@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: noone-home
+  description: GitHub organization Noone-Home
+  annotations:
+    github.com/org: Noone-Home
+spec:
+  type: organization
+  profile:
+    displayName: Noone-Home
+  children: []

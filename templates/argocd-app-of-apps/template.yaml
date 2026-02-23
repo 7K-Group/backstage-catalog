@@ -66,7 +66,6 @@ spec:
     - title: Argo CD settings
       required:
         - destinationServer
-        - destinationNamespace
       properties:
         argocdNamespace:
           title: Argo CD namespace
@@ -83,11 +82,6 @@ spec:
           type: string
           description: Kubernetes API server URL for Argo CD destination (e.g. https://kubernetes.default.svc)
           default: https://kubernetes.default.svc
-        destinationNamespace:
-          title: Destination namespace
-          type: string
-          description: Namespace where the child apps will deploy by default.
-          default: default
 
     - title: Repository
       required:
@@ -133,7 +127,6 @@ spec:
           argocdNamespace: ${{ parameters.argocdNamespace }}
           project: ${{ parameters.project }}
           destinationServer: ${{ parameters.destinationServer }}
-          destinationNamespace: ${{ parameters.destinationNamespace }}
           argoRepoUrl: https://github.com/${{ steps['fetchOrg'].output.entity.metadata.annotations['github.com/org'] }}/${{ parameters.repoName }}.git
 
     - id: publish

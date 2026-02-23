@@ -13,7 +13,7 @@ spec:
       recurse: true
   destination:
     server: ${{ values.destinationServer }}
-    namespace: ${{ values.destinationNamespace }}
+    namespace: ${{ values.argocdNamespace }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
