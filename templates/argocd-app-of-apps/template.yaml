@@ -18,7 +18,6 @@ spec:
         - name
         - owner
         - serviceEntityRef
-        - appsSubfolder
 
       properties:
         name:
@@ -56,13 +55,6 @@ spec:
             catalogFilter:
               kind: Resource
               'spec.type': kubernetes-cluster
-
-        appsSubfolder:
-          title: Apps subfolder (domain/project)
-          type: string
-          description: Subfolder under `apps/` to group child Applications (e.g. platform, payments, identity).
-          default: platform
-          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
 
     - title: Argo CD settings
       required:
@@ -124,7 +116,6 @@ spec:
           owner: ${{ parameters.owner }}
           system: ${{ parameters.system }}
           serviceEntityRef: ${{ parameters.serviceEntityRef }}
-          appsSubfolder: ${{ parameters.appsSubfolder }}
           argocdNamespace: ${{ parameters.argocdNamespace }}
           project: ${{ parameters.project }}
           destinationServer: ${{ parameters.destinationServer }}
