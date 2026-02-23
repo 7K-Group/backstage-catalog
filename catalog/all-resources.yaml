@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-    - ./resources/example-db.yaml
+    - ./resources/local-kubernetes-cluster.yaml
