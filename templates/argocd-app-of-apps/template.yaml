@@ -37,6 +37,7 @@ spec:
           ui:options:
             catalogFilter:
               kind: Group
+              'spec.type': team
         system:
           title: System
           type: string
