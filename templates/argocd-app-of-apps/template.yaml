@@ -122,13 +122,6 @@ spec:
         description: ${{ parameters.description }}
         defaultBranch: main
 
-    - id: register
-      name: Register in catalog
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps['publish'].output.remoteUrl | replace('.git', '') }}
-        catalogInfoPath: /blob/main/catalog-info.yaml
-
   output:
     links:
       - title: Repository
