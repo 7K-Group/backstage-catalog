@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
-  name: {{ values.name }}
-  description: Backstage catalog entities for Argo CD app-of-apps {{ values.name }}
+  name: ${{ values.name }}
+  description: Backstage catalog entities for Argo CD app-of-apps ${{ values.name }}
 spec:
   type: url
   targets:
