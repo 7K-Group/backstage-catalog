@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: {{ values.name }}
-  description: {{ values.description }}
+  name: ${{ values.name }}
+  description: ${{ values.description }}
   annotations:
-    argocd/app-name: {{ values.name }}
-    argocd/app-namespace: {{ values.argocdNamespace }}
+    argocd/app-name: ${{ values.name }}
+    argocd/app-namespace: ${{ values.argocdNamespace }}
 spec:
   type: keycloak
-  owner: {{ values.owner }}
-  system: {{ values.system }}
+  owner: ${{ values.owner }}
+  system: ${{ values.system }}
