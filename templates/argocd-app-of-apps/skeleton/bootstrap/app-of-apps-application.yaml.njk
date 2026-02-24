@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: common
-  namespace: ${{ values.argocdNamespace }}
+  namespace: {{ values.argocdNamespace }}
 spec:
   description: Core shared infrastructure components (storage, certs, ingress controllers, monitoring)
   sourceRepos:
     - '*'
   destinations:
-    - namespace: ${{ values.argocdNamespace }}
-      server: ${{ values.destinationServer }}
+    - namespace: {{ values.argocdNamespace }}
+      server: {{ values.destinationServer }}
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
@@ -22,19 +22,19 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ${{ values.name }}
-  namespace: ${{ values.argocdNamespace }}
+  name: {{ values.name }}
+  namespace: {{ values.argocdNamespace }}
 spec:
-  project: ${{ values.project }}
+  project: {{ values.project }}
   source:
-    repoURL: ${{ values.argoRepoUrl }}
+    repoURL: {{ values.argoRepoUrl }}
     targetRevision: HEAD
     path: apps
     directory:
       recurse: true
   destination:
-    server: ${{ values.destinationServer }}
-    namespace: ${{ values.argocdNamespace }}
+    server: {{ values.destinationServer }}
+    namespace: {{ values.argocdNamespace }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

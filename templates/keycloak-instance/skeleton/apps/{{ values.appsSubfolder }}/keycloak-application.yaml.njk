@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-{{ values.name }}
+  namespace: {{ values.argocdNamespace }}
+spec:
+  project: {{ values.project }}
+  source:
+    repoURL: {{ values.chartRepoUrl }}
+    chart: {{ values.chartName }}
+    targetRevision: {{ values.chartVersion }}
+    helm:
+      releaseName: keycloak-{{ values.name }}
+{% if values.helmValues %}
+      values: |
+{{ values.helmValues | indent(8, true) }}
+{% endif %}
+  destination:
+    server: {{ values.destinationServer }}
+    namespace: {{ values.destinationNamespace }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
