@@ -9,3 +9,4 @@ spec:
   type: organization
   profile:
     displayName: Inari
+  children: []
