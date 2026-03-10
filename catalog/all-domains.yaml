@@ -11,3 +11,4 @@ spec:
     - ./domains/integration-delivery.yaml
     - ./domains/security-compliance.yaml
     - ./domains/observability-reliability.yaml
+    - ./domains/platform-gitops.yaml
