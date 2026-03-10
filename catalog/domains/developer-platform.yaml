@@ -6,4 +6,4 @@ metadata:
     Internal developer platform interface, self-service workflows, service
     catalog, golden paths, and developer insights.
 spec:
-  owner: group:developer-experience-team
+  owner: group:inari

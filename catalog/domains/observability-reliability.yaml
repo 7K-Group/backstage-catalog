@@ -6,4 +6,4 @@ metadata:
     Platform and product reliability — monitoring, logging, tracing, alerting,
     SLO/SLA reporting, and incident analysis.
 spec:
-  owner: group:observability-reliability-team
+  owner: group:inari

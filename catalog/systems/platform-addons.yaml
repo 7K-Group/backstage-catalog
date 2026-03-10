@@ -6,5 +6,5 @@ metadata:
     Cluster-wide baseline addons (cert-manager, Alloy, external-secrets,
     ingress controller, policy engine) managed via Argo CD ApplicationSets.
 spec:
-  owner: group:cloud-infrastructure-team
+  owner: domain:cloud-infrastructure
   domain: cloud-infrastructure

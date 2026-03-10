@@ -32,12 +32,12 @@ spec:
         owner:
           title: Owner Group
           type: string
-          description: Owning group name (e.g. cloud-infrastructure-team)
+          description: Owning group name (e.g. Inari)
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
               kind: Group
-              spec.type: team
+              spec.type: organization
 
   steps:
     - id: fetch-repo

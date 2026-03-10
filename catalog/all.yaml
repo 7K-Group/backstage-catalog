@@ -9,5 +9,4 @@ spec:
     - ./all-domains.yaml
     - ./all-systems.yaml
     - ./all-acme.yaml
-    - ./all-templates.yaml
 

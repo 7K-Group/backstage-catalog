@@ -6,5 +6,5 @@ metadata:
     Backstage-based developer portal providing service catalog, scaffolder
     templates, TechDocs, and self-service workflows.
 spec:
-  owner: group:developer-experience-team
+  owner: domain:developer-platform
   domain: developer-platform

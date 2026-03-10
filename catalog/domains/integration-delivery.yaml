@@ -6,4 +6,4 @@ metadata:
     Software delivery lifecycle — VCS integration, CI/CD pipelines, IaC workflow
     automation, and environment promotion patterns.
 spec:
-  owner: group:delivery-control-team
+  owner: group:inari

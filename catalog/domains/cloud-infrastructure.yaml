@@ -6,4 +6,4 @@ metadata:
     Foundational runtime resources and managed services — cloud services, cluster
     management, networking, DNS, registries, and data platforms.
 spec:
-  owner: group:cloud-infrastructure-team
+  owner: group:inari

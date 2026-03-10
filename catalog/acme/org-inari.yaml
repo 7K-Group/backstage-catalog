@@ -9,10 +9,3 @@ spec:
   type: organization
   profile:
     displayName: Inari
-  children:
-    - developer-control-plane
-    - resource-plane
-    - integration-delivery-plane
-    - security-plane
-    - observability-plane
-    - core-team

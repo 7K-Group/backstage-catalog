@@ -6,5 +6,5 @@ metadata:
     Crossplane-backed managed service instances (e.g. Keycloak, Postgres)
     provisioned via umbrella charts and GitOps.
 spec:
-  owner: group:cloud-infrastructure-team
+  owner: domain:cloud-infrastructure
   domain: cloud-infrastructure

@@ -6,4 +6,4 @@ metadata:
     Security and governance across all planes — secrets management, identity and
     access controls, policy enforcement, and compliance reporting.
 spec:
-  owner: group:security-compliance-team
+  owner: group:inari
