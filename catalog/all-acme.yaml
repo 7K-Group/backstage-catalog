@@ -12,5 +12,5 @@ spec:
     - ./acme/plane-integration-delivery.yaml
     - ./acme/plane-security.yaml
     - ./acme/plane-observability.yaml
-    - ./acme/team-core.yaml
+    - ./acme/plane-core.yaml
     - ./acme/user-joaodss.yaml
