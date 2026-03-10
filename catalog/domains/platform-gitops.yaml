@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: platform-gitops
+  description: >-
+    Core GitOps control center handling client integration and platform management
+spec:
+  owner: group:default/inari
