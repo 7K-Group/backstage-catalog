@@ -7,4 +7,5 @@ spec:
   type: url
   targets:
     - ./acme/org-inari.yaml
+    - ./acme/team-core.yaml
     - ./acme/user-joaodss.yaml
