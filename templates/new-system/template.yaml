@@ -1,0 +1,100 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: new-system
+  title: New System
+  description: Creates a new Backstage System entity and registers it in the catalog via Pull Request
+  tags:
+    - system
+    - catalog
+spec:
+  owner: group:developer-experience-team
+  type: catalog
+
+  parameters:
+    - title: System Details
+      required:
+        - name
+        - description
+        - owner
+        - domain
+      properties:
+        name:
+          title: System Name
+          type: string
+          description: Unique kebab-case identifier (e.g. monitoring-stack)
+          pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: A brief description of what this system provides
+          ui:widget: textarea
+        owner:
+          title: Owner Group
+          type: string
+          description: Owning group name (e.g. cloud-infrastructure-team)
+          ui:field: EntityPicker
+          ui:options:
+            defaultKind: Group
+            defaultNamespace: default
+            catalogFilter:
+              kind: Group
+              spec.type: team
+        domain:
+          title: Domain
+          type: string
+          description: The domain this system belongs to
+          ui:field: EntityPicker
+          ui:options:
+            defaultKind: Domain
+            defaultNamespace: default
+            catalogFilter:
+              kind: Domain
+
+  steps:
+    - id: fetch-repo
+      name: Fetch catalog repository
+      action: fetch:plain
+      input:
+        url: https://github.com/7K-Group/backstage-catalog
+
+    - id: create-system-file
+      name: Create system entity file
+      action: fetch:template
+      input:
+        url: ./skeleton
+        targetPath: ./
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+          domain: ${{ parameters.domain }}
+
+    - id: register-system
+      name: Register system in location file
+      action: roadiehq:utils:fs:append
+      input:
+        path: ./catalog/all-systems.yaml
+        content: "    - ./systems/${{ parameters.name }}.yaml\n"
+
+    - id: create-pr
+      name: Create Pull Request
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?owner=7K-Group&repo=backstage-catalog
+        branchName: scaffolder/add-system-${{ parameters.name }}
+        title: "feat: add system ${{ parameters.name }}"
+        description: |
+          Adds a new **System** entity `${{ parameters.name }}`.
+
+          **Description:** ${{ parameters.description }}
+          **Owner:** ${{ parameters.owner }}
+          **Domain:** ${{ parameters.domain }}
+
+          _Created by Backstage Software Templates._
+
+  output:
+    links:
+      - title: Pull Request
+        url: ${{ steps['create-pr'].output.remoteUrl }}

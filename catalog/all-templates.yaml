@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-templates
+  description: Collection of all scaffolder templates
+spec:
+  type: url
+  targets:
+    - ../templates/new-domain/template.yaml
+    - ../templates/new-system/template.yaml
+    - ../templates/new-acme-group/template.yaml

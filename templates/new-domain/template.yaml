@@ -1,0 +1,85 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: new-domain
+  title: New Domain
+  description: Creates a new Backstage Domain entity and registers it in the catalog via Pull Request
+  tags:
+    - domain
+    - catalog
+spec:
+  owner: group:developer-experience-team
+  type: catalog
+
+  parameters:
+    - title: Domain Details
+      required:
+        - name
+        - description
+        - owner
+      properties:
+        name:
+          title: Domain Name
+          type: string
+          description: Unique kebab-case identifier (e.g. data-analytics)
+          pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: A brief description of the domain's scope and purpose
+          ui:widget: textarea
+        owner:
+          title: Owner Group
+          type: string
+          description: Owning group name (e.g. cloud-infrastructure-team)
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+              spec.type: team
+
+  steps:
+    - id: fetch-repo
+      name: Fetch catalog repository
+      action: fetch:plain
+      input:
+        url: https://github.com/7K-Group/backstage-catalog
+
+    - id: create-domain-file
+      name: Create domain entity file
+      action: fetch:template
+      input:
+        url: ./skeleton
+        targetPath: ./
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+
+    - id: register-domain
+      name: Register domain in location file
+      action: roadiehq:utils:fs:append
+      input:
+        path: ./catalog/all-domains.yaml
+        content: "    - ./domains/${{ parameters.name }}.yaml\n"
+
+    - id: create-pr
+      name: Create Pull Request
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?owner=7K-Group&repo=backstage-catalog
+        branchName: scaffolder/add-domain-${{ parameters.name }}
+        title: "feat: add domain ${{ parameters.name }}"
+        description: |
+          Adds a new **Domain** entity `${{ parameters.name }}`.
+
+          **Description:** ${{ parameters.description }}
+          **Owner:** ${{ parameters.owner }}
+
+          _Created by Backstage Software Templates._
+
+  output:
+    links:
+      - title: Pull Request
+        url: ${{ steps['create-pr'].output.remoteUrl }}
