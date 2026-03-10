@@ -71,6 +71,8 @@ spec:
         repoUrl: github.com?owner=7K-Group&repo=backstage-catalog
         branchName: scaffolder/add-domain-${{ parameters.name }}
         title: "feat: add domain ${{ parameters.name }}"
+        autoMerge:
+          mergeMethod: squash
         description: |
           Adds a new **Domain** entity `${{ parameters.name }}`.
 

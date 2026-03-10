@@ -85,6 +85,8 @@ spec:
         repoUrl: github.com?owner=7K-Group&repo=backstage-catalog
         branchName: scaffolder/add-system-${{ parameters.name }}
         title: "feat: add system ${{ parameters.name }}"
+        autoMerge:
+          mergeMethod: squash
         description: |
           Adds a new **System** entity `${{ parameters.name }}`.
 
