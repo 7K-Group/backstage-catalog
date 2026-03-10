@@ -6,5 +6,5 @@ metadata:
     Argo CD hub and child control planes managing fleet-wide GitOps delivery,
     including bootstrap profiles for managed-instances and app-platform clusters.
 spec:
-  owner: domain:integration-delivery
-  domain: integration-delivery
+  owner: domain:platform-gitops
+  domain: platform-gitops
