@@ -6,6 +6,5 @@ metadata:
 spec:
   type: url
   targets:
-    - ../templates/new-domain/template.yaml
-    - ../templates/new-system/template.yaml
-    - ../templates/new-acme-group/template.yaml
+    - ./new-domain/template.yaml
+    - ./new-system/template.yaml

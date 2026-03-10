@@ -7,3 +7,4 @@ spec:
   type: url
   targets:
     - ./catalog/all.yaml
+    - ./templates/all.yaml
