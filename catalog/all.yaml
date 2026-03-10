@@ -6,9 +6,6 @@ metadata:
 spec:
   type: url
   targets:
-    - ./all-apis.yaml
-    - ./all-components.yaml
-    - ./all-resources.yaml
     - ./all-domains.yaml
     - ./all-systems.yaml
 

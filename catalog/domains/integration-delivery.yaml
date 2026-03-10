@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: integration-delivery
+  description: >-
+    Software delivery lifecycle — VCS integration, CI/CD pipelines, IaC workflow
+    automation, and environment promotion patterns.
+spec:
+  owner: group:delivery-control-team

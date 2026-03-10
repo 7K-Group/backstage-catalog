@@ -2,6 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
   name: developer-platform
-  description: Developer Platform domain (internal developer experience, tooling, and platform capabilities).
+  description: >-
+    Internal developer platform interface, self-service workflows, service
+    catalog, golden paths, and developer insights.
 spec:
-  owner: group:default/core-team
+  owner: group:developer-experience-team

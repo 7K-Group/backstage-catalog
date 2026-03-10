@@ -1,0 +1,28 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: developer-control-plane
+  description: >-
+    Developer Control Plane — provides the internal developer platform interface
+    and self-service workflows.
+spec:
+  type: plane
+  profile:
+    displayName: Developer Control Plane
+  parent: inari
+  children:
+    - developer-experience-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: developer-experience-team
+  description: >-
+    Owns developer portal/service catalog, golden paths, workload specification
+    standards, and developer insights.
+spec:
+  type: team
+  profile:
+    displayName: Developer Experience Team
+  parent: developer-control-plane
+  children: []

@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: backstage-portal
+  description: >-
+    Backstage-based developer portal providing service catalog, scaffolder
+    templates, TechDocs, and self-service workflows.
+spec:
+  owner: group:developer-experience-team
+  domain: developer-platform

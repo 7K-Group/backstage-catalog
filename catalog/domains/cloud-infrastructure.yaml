@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: cloud-infrastructure
+  description: >-
+    Foundational runtime resources and managed services — cloud services, cluster
+    management, networking, DNS, registries, and data platforms.
+spec:
+  owner: group:cloud-infrastructure-team

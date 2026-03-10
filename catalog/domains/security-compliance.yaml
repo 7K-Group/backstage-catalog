@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: security-compliance
+  description: >-
+    Security and governance across all planes — secrets management, identity and
+    access controls, policy enforcement, and compliance reporting.
+spec:
+  owner: group:security-compliance-team

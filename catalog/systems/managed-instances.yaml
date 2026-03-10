@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: managed-instances
+  description: >-
+    Crossplane-backed managed service instances (e.g. Keycloak, Postgres)
+    provisioned via umbrella charts and GitOps.
+spec:
+  owner: group:cloud-infrastructure-team
+  domain: cloud-infrastructure

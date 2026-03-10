@@ -6,4 +6,7 @@ metadata:
 spec:
   type: url
   targets:
-    - ./systems/developer-platform.yaml
+    - ./systems/backstage-portal.yaml
+    - ./systems/managed-instances.yaml
+    - ./systems/platform-addons.yaml
+    - ./systems/gitops-control-plane.yaml

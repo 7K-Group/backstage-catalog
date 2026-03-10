@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: org-identities
+  description: Collection of all Inari identity entities (organization, planes, teams, users)
+spec:
+  type: url
+  targets:
+    - ./acme/org-inari.yaml
+    - ./acme/plane-developer-control.yaml
+    - ./acme/plane-resource.yaml
+    - ./acme/plane-integration-delivery.yaml
+    - ./acme/plane-security.yaml
+    - ./acme/plane-observability.yaml
+    - ./acme/team-core.yaml
+    - ./acme/user-joaodss.yaml

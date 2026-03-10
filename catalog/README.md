@@ -23,13 +23,21 @@ Conventions:
 
 ```mermaid
 graph TD
-	A[Group: sevenk-group<br/>type: organization] --> C[Group: platform-operations-plane<br/>type: plane]
-	C --> D[Group: operations-team<br/>type: team]
-	D --> E[Group: platform-admin-team<br/>type: team]
-	U[User: joaodss] -->|memberOf| E
-	U -->|memberOf| D
-	U -->|memberOf| C
-	U -->|memberOf| A
+	ORG[Group: inari<br/>type: organization]
+	ORG --> DCP[Group: developer-control-plane<br/>type: plane]
+	ORG --> RP[Group: resource-plane<br/>type: plane]
+	ORG --> IDP[Group: integration-delivery-plane<br/>type: plane]
+	ORG --> SP[Group: security-plane<br/>type: plane]
+	ORG --> OP[Group: observability-plane<br/>type: plane]
+	ORG --> CT[Group: core-team<br/>type: team]
+	DCP --> DET[Group: developer-experience-team<br/>type: team]
+	RP --> CIT[Group: cloud-infrastructure-team<br/>type: team]
+	IDP --> DCT[Group: delivery-control-team<br/>type: team]
+	SP --> SCT[Group: security-compliance-team<br/>type: team]
+	OP --> ORT[Group: observability-reliability-team<br/>type: team]
+	U[User: joaodss] -->|memberOf| CT
+	U -->|memberOf| DCP
+	U -->|memberOf| ORG
 ```
 
 Backstage relations are direct; user membership is not automatically inferred from child teams to parent groups.

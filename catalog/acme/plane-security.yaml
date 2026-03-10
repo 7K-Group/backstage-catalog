@@ -1,0 +1,27 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: security-plane
+  description: >-
+    Security Plane — embeds security and governance across all planes.
+spec:
+  type: plane
+  profile:
+    displayName: Security Plane
+  parent: inari
+  children:
+    - security-compliance-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: security-compliance-team
+  description: >-
+    Owns security suites, secrets management, identity and access controls,
+    policy enforcement, software supply chain controls, and compliance reporting.
+spec:
+  type: team
+  profile:
+    displayName: Security & Compliance Team
+  parent: security-plane
+  children: []

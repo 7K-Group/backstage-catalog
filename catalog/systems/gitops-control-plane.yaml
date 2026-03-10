@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: gitops-control-plane
+  description: >-
+    Argo CD hub and child control planes managing fleet-wide GitOps delivery,
+    including bootstrap profiles for managed-instances and app-platform clusters.
+spec:
+  owner: group:delivery-control-team
+  domain: integration-delivery

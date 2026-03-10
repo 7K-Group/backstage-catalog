@@ -7,3 +7,7 @@ spec:
   type: url
   targets:
     - ./domains/developer-platform.yaml
+    - ./domains/cloud-infrastructure.yaml
+    - ./domains/integration-delivery.yaml
+    - ./domains/security-compliance.yaml
+    - ./domains/observability-reliability.yaml

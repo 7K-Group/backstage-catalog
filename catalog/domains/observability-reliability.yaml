@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: observability-reliability
+  description: >-
+    Platform and product reliability — monitoring, logging, tracing, alerting,
+    SLO/SLA reporting, and incident analysis.
+spec:
+  owner: group:observability-reliability-team

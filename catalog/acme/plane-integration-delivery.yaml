@@ -1,0 +1,27 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: integration-delivery-plane
+  description: >-
+    Integration & Delivery Plane — standardizes the software delivery lifecycle.
+spec:
+  type: plane
+  profile:
+    displayName: Integration & Delivery Plane
+  parent: inari
+  children:
+    - delivery-control-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: delivery-control-team
+  description: >-
+    Owns VCS integration, CI pipelines, CD pipelines, DevOps platform
+    capabilities, IaC workflow automation, and environment promotion patterns.
+spec:
+  type: team
+  profile:
+    displayName: Delivery Control Team
+  parent: integration-delivery-plane
+  children: []

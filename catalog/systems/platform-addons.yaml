@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: platform-addons
+  description: >-
+    Cluster-wide baseline addons (cert-manager, Alloy, external-secrets,
+    ingress controller, policy engine) managed via Argo CD ApplicationSets.
+spec:
+  owner: group:cloud-infrastructure-team
+  domain: cloud-infrastructure
